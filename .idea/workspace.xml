@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8ca1161-4e90-4a3e-b8ca-c4dae5f56feb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/WebScrapping.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -57,7 +59,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -263,7 +265,7 @@
       <option name="presentableId" value="Default" />
       <updated>1776791621029</updated>
       <workItem from="1776791622050" duration="679000" />
-      <workItem from="1776879409348" duration="5610000" />
+      <workItem from="1776879409348" duration="5923000" />
     </task>
     <servers />
   </component>
