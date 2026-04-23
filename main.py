@@ -15,7 +15,7 @@ def executar():
 
         print(f"Sucesso! {len(dados_finais)} produtos processados.\n")
 
-        for produto in dados_finais:
+        for _, produto in dados_finais.iterrows():
             print(f"Produto: {produto['nome']} | Valor: R$ {produto['preco']:.2f}")
     else:
         print("Não foi possível obter os produtos.")

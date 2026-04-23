@@ -9,17 +9,14 @@ import re
 
 def extrair_preco(texto):
     matches = re.findall(r"\d{1,3}(?:\.\d{3})*,\d{2}", texto)
-    if not matches:
-        return None
 
-    # pega o menor preço encontrado no bloco, que costuma ser o preço atual/pix
     valores = []
+
     for match in matches:
-        try:
-            valor = float(match.replace(".", "").replace(",", "."))
+        valor = float(match.replace(".", "").replace(",", "."))
+
+        if valor > 1000:
             valores.append(valor)
-        except ValueError:
-            continue
 
     if not valores:
         return None
