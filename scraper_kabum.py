@@ -24,7 +24,7 @@ def extrair_preco(texto):
     return min(valores)
 
 
-def pegar_produtos(url):
+def pegar_produtos(URL_KABUM):
     options = Options()
     options.add_argument("--start-maximized")
     options.add_argument("--disable-blink-features=AutomationControlled")
@@ -39,7 +39,7 @@ def pegar_produtos(url):
     produtos = []
 
     try:
-        driver.get(url)
+        driver.get(URL_KABUM)
         time.sleep(6)
 
         links = driver.find_elements(By.CSS_SELECTOR, 'a[href*="/produto/"]')
