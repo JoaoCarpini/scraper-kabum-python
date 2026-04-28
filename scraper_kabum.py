@@ -2,8 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
-import time
 import re
 
 
@@ -40,7 +40,12 @@ def pegar_produtos(URL_KABUM):
 
     try:
         driver.get(URL_KABUM)
-        time.sleep(6)
+
+        WebDriverWait(driver, 10).until(
+            lambda x: x.find_element(
+                By.CSS_SELECTOR, "article.productCard"
+            )
+        )
 
         links = driver.find_elements(By.CSS_SELECTOR, 'a[href*="/produto/"]')
         print(f"Quantidade de links de produto encontrados: {len(links)}")
