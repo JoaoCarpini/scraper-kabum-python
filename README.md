@@ -76,7 +76,7 @@ README.md
 ## 1️⃣ Clonar o repositório
 
 ```bash
-git clone SEU_LINK_AQUI
+git clone https://github.com/JoaoCarpini/Comparador-Inteligente-de-GPUs-WebScraper
 ```
 
 ---
