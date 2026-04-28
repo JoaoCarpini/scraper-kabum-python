@@ -1,5 +1,6 @@
 from scraper_kabum import pegar_produtos
 from scraper_mercadolivre import pegar_produtos_mercadolivre
+from scraper_amazon import pegar_produtos_amazon
 from processador import tratar_dados
 from dotenv import load_dotenv
 import os
@@ -13,43 +14,72 @@ URL_KABUM = os.getenv(
 
 URL_MERCADO = os.getenv(
     "URL_MERCADO",
-    "https://lista.mercadolivre.com.br/placa-de-video-nvidia-geforce-rtx#D[A:placa%20de%20video%20nvidia%20geforce%20rtx]"
+    "https://lista.mercadolivre.com.br/placa-de-video-nvidia-geforce-rtx"
+)
+
+URL_AMAZON = os.getenv(
+    "URL_AMAZON",
+    "https://www.amazon.com.br/b?node=16364811011&ref=cct_cg_BRPCG_3a1"
 )
 
 
-def executar_kabum():
-    print("Buscando dados...")
-    lista_de_produtos = pegar_produtos(URL_KABUM)
+def executar_comparador():
+    print("Buscando dados da Kabum...")
+    lista_kabum = pegar_produtos(URL_KABUM)
 
-    print(f"Quantidade recebida do scraper: {len(lista_de_produtos)}")
+    print("Buscando dados do Mercado Livre...")
+    lista_mercado = pegar_produtos_mercadolivre(URL_MERCADO)
 
-    if lista_de_produtos:
-        dados_finais = tratar_dados(lista_de_produtos)
+    print("Buscando dados da Amazon...")
+    lista_amazon = pegar_produtos_amazon(URL_AMAZON)
 
-        print(f"Sucesso! {len(dados_finais)} produtos processados.\n")
+    lista_total = lista_kabum + lista_mercado + lista_amazon
 
+    print(f"\nTotal de produtos recebidos: {len(lista_total)}")
+
+    if lista_total:
+        dados_finais = tratar_dados(lista_total)
+
+        print(f"\nSucesso! {len(dados_finais)} produtos processados.\n")
+
+        # TODOS OS PRODUTOS
+        print("========== TODOS OS PRODUTOS ==========\n")
         for _, produto in dados_finais.iterrows():
-            print(f"Produto: {produto['nome']} | Valor: R$ {produto['preco']:.2f}")
-    else:
-        print("Não foi possível obter os produtos.")
+            print(
+                f"Produto: {produto['nome']} | "
+                f"Loja: {produto['loja']} | "
+                f"Valor: R$ {produto['preco']:.2f}"
+            )
 
-def executar_mercadolivre():
-    print("Buscando dados...")
-    lista_de_produtos = pegar_produtos_mercadolivre(URL_MERCADO)
+        mais_baratos = dados_finais.sort_values(
+            by=["preco"],
+            ascending=True
+        ).head(10)
 
-    print(f"Quantidade recebida do scraper: {len(lista_de_produtos)}")
+        print("\n========== TOP 10 MAIS BARATOS ==========\n")
+        for _, produto in mais_baratos.iterrows():
+            print(
+                f"Produto: {produto['nome']} | "
+                f"Loja: {produto['loja']} | "
+                f"Valor: R$ {produto['preco']:.2f}"
+            )
 
-    if lista_de_produtos:
-        dados_finais = tratar_dados(lista_de_produtos)
+        mais_caros = dados_finais.sort_values(
+            by=["preco"],
+            ascending=False
+        ).head(10)
 
-        print(f"Sucesso! {len(dados_finais)} produtos processados.\n")
+        print("\n========== TOP 10 MAIS CAROS ==========\n")
+        for _, produto in mais_caros.iterrows():
+            print(
+                f"Produto: {produto['nome']} | "
+                f"Loja: {produto['loja']} | "
+                f"Valor: R$ {produto['preco']:.2f}"
+            )
 
-        for _, produto in dados_finais.iterrows():
-            print(f"Produto: {produto['nome']} | Valor: R$ {produto['preco']:.2f}")
     else:
         print("Não foi possível obter os produtos.")
 
 
 if __name__ == "__main__":
-    executar_kabum()
-    executar_mercadolivre()
+    executar_comparador()

@@ -5,9 +5,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
-
-def pegar_produtos_mercadolivre(url):
-    print("Entrou no scraper do Mercado Livre")
+def pegar_produtos_amazon(URL_AMAZON):
+    print("Entrou no scraper do Amazon")
 
     produtos = []
 
@@ -22,39 +21,38 @@ def pegar_produtos_mercadolivre(url):
         options=options
     )
 
-    driver.get(url)
+    driver.get(URL_AMAZON)
     print("Abriu a página")
 
     WebDriverWait(driver, 10).until(
         lambda x: x.find_element(
-            By.CSS_SELECTOR, "div.poly-card__content"
+            By.CSS_SELECTOR,
+            "div[data-component-type='s-search-result']"
         )
     )
 
-    cards = driver.find_elements(By.CSS_SELECTOR, "div.poly-card__content")
+    cards = driver.find_elements(By.CSS_SELECTOR, "div[data-component-type='s-search-result']")
     print(f"Cards encontrados: {len(cards)}")
 
     for card in cards:
         try:
-            titulo = card.find_element(
+            nome = card.find_element(
                 By.CSS_SELECTOR,
-                "a.poly-component__title"
-            )
-
-            nome = titulo.text.strip()
+                "h2 span"
+            ).text.strip()
 
             try:
                 parte_inteira = card.find_element(
                     By.CSS_SELECTOR,
-                    "span.andes-money-amount__fraction"
-                ).text.replace(".", "")
+                    "span.a-price-whole"
+                ).text.replace(".", "").replace(",", "")
             except:
                 continue
 
             try:
                 centavos = card.find_element(
                     By.CSS_SELECTOR,
-                    "span.andes-money-amount__cents"
+                    "span.a-price-fraction"
                 ).text
             except:
                 centavos = "00"
@@ -62,24 +60,14 @@ def pegar_produtos_mercadolivre(url):
             valor = f"{parte_inteira}.{centavos}"
             preco_final = float(valor)
 
-            nome_upper = nome.upper()
-            termos_validos = ["RTX", "GTX", "RX ", "RX-", "RX0", "RX5", "RX6", "RX7", "GT ", "RADEON", "GEFORCE", "QUADRO", "GPU", "AMD", "NVIDIA"]
-
-            e_placa = any(termo in nome_upper for termo in termos_validos)
-
-            termos_bloqueados = ["SUPORTE", "ESPELHO", "CABO", "COOLER", "PASTA TERMICA", "FAN", "VENTOINHA", "EXTENSOR"]
-            e_acessorio = any(termo in nome_upper for termo in termos_bloqueados)
-
-            if not e_placa or e_acessorio:
-                continue
-
             produtos.append({
                 "nome": nome,
                 "preco": preco_final,
-                "loja": "Mercado Livre"
+                "loja": "Amazon"
             })
 
-        except Exception:
+        except Exception as e:
+            print(f"Erro: {e}")
             continue
 
     driver.quit()

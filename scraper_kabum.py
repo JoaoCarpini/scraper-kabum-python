@@ -76,7 +76,8 @@ def pegar_produtos(URL_KABUM):
 
                 produtos.append({
                     "nome": nome,
-                    "preco": preco
+                    "preco": preco,
+                    "loja": "Kabum"
                 })
 
                 vistos.add(href)
