@@ -43,11 +43,16 @@ def pegar_produtos(URL_KABUM):
 
         WebDriverWait(driver, 10).until(
             lambda x: x.find_element(
-                By.CSS_SELECTOR, "article.productCard"
+                By.CSS_SELECTOR,
+                'a[href*="/produto/"]'
             )
         )
 
-        links = driver.find_elements(By.CSS_SELECTOR, 'a[href*="/produto/"]')
+        links = driver.find_elements(
+            By.CSS_SELECTOR,
+            'a[href*="/produto/"]'
+        )
+
         print(f"Quantidade de links de produto encontrados: {len(links)}")
 
         vistos = set()
@@ -60,14 +65,26 @@ def pegar_produtos(URL_KABUM):
                     continue
 
                 texto = link.text.strip()
+
                 if not texto:
                     continue
 
-                linhas = [linha.strip() for linha in texto.split("\n") if linha.strip()]
+                linhas = [
+                    linha.strip()
+                    for linha in texto.split("\n")
+                    if linha.strip()
+                ]
 
                 nome = None
+
                 for linha in linhas:
-                    if "Placa de Vídeo" in linha or "Placa de Video" in linha:
+                    if (
+                        "Placa de Vídeo" in linha
+                        or "Placa de Video" in linha
+                        or "RTX" in linha.upper()
+                        or "GTX" in linha.upper()
+                        or "RX" in linha.upper()
+                    ):
                         nome = linha
                         break
 
@@ -87,13 +104,14 @@ def pegar_produtos(URL_KABUM):
 
                 vistos.add(href)
 
-            except Exception:
+            except Exception as e:
+                print(f"Erro ao processar produto: {e}")
                 continue
 
         return produtos
 
     except Exception as e:
-        print(f"Erro no scraping: {e}")
+        print(f"Erro no scraping da Kabum: {e}")
         return []
 
     finally:
