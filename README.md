@@ -1,62 +1,153 @@
-# 🚀 Scraper de Preços com Python
+# 🚀 Comparador Inteligente de GPUs
 
-Projeto de web scraping desenvolvido para coletar e analisar preços de placas de vídeo em um e-commerce.
+Projeto desenvolvido em Python com foco em **Web Scraping**, **tratamento de dados** e **visualização interativa**, utilizando Streamlit para transformar dados em uma experiência visual profissional.
 
-> ⚠️ A Kabum foi utilizada apenas para fins de estudo.  
-> A lógica pode ser facilmente adaptada para outros sites.
-
----
-
-## 🔍 Funcionalidades
-
-- Acessa a página automaticamente utilizando Selenium
-- Coleta nome e preço dos produtos
-- Remove produtos duplicados
-- Filtra produtos por faixa de preço
-- Ordena os resultados
-- Exibe os 10 produtos mais caros dentro do filtro
+O sistema realiza a busca automatizada de placas de vídeo em diferentes e-commerces, compara preços e exibe as melhores oportunidades de compra de forma organizada e intuitiva.
 
 ---
 
-## 🧠 O que foi aplicado
+# 🎯 Objetivo
 
-- Web Scraping com Selenium
-- Tratamento de dados com Pandas
-- Expressões regulares (Regex)
-- Manipulação de listas e dicionários
-- Pipeline de dados (extração → tratamento → saída)
+Criar uma solução prática para comparar preços de GPUs entre grandes marketplaces, facilitando a análise de custo-benefício e permitindo identificar as melhores ofertas disponíveis.
 
----
+O projeto simula um cenário real de mercado, aplicando:
 
-## 🛠️ Tecnologias utilizadas
+* automação
+* tratamento de dados
+* comparação entre e-commerces
+* dashboard interativo
+* tomada de decisão baseada em dados
 
-- Python
-- Selenium
-- Pandas
-- WebDriver Manager
+Mais do que um scraper, a proposta foi desenvolver uma solução com cara de produto real.
 
 ---
 
-## ▶️ Como executar o projeto
+# 🛒 E-commerces Utilizados
 
-### 1. Clonar o repositório
+* 🟠 Kabum
+* 🟡 Mercado Livre
+* 🔵 Amazon
+
+---
+
+# 🛠 Tecnologias Utilizadas
+
+* 🐍 Python
+* 🤖 Selenium
+* 📊 Pandas
+* 🎨 Streamlit
+* 🔐 Dotenv
+* ⚙ WebDriver Manager
+* 🌐 Git + GitHub
+
+---
+
+# ✨ Funcionalidades
+
+✔ Web Scraping automatizado em múltiplas plataformas
+✔ Comparação de preços entre diferentes lojas
+✔ Filtro inteligente para placas relevantes (RTX, GTX, RX, etc.)
+✔ Remoção de acessórios e produtos irrelevantes
+✔ Top 10 placas mais baratas
+✔ Top 10 placas mais caras
+✔ Dashboard visual com Streamlit
+✔ Tratamento e organização de dados com Pandas
+✔ Estrutura preparada para expansão futura
+
+---
+
+# 📁 Estrutura do Projeto
 
 ```bash
-1.
-git clone https://github.com/JoaoCarpini/scraper-kabum-python.git
+app.py
+main.py
+processador.py
+scraper_kabum.py
+scraper_mercadolivre.py
+scraper_amazon.py
+.env
+README.md
+```
 
-2. Acessar a pasta
-cd scraper-kabum-python
+---
 
-3. Instalar as dependências
-pip install selenium pandas webdriver-manager
+# ▶ Como Executar
 
-4. Executar
-python main.py
+## 1️⃣ Clonar o repositório
 
-📊 Exemplo de saída
-Produto: Placa de Vídeo RTX 5070...
-Valor: R$ 4799.99
+```bash
+git clone SEU_LINK_AQUI
+```
 
-Produto: Placa de Vídeo RTX 5060 Ti...
-Valor: R$ 4099.99
+---
+
+## 2️⃣ Instalar as dependências
+
+```bash
+pip install selenium pandas streamlit python-dotenv webdriver-manager
+```
+
+---
+
+## 3️⃣ Configurar o arquivo `.env`
+
+```env
+URL_KABUM=...
+URL_MERCADO=...
+URL_AMAZON=...
+```
+
+---
+
+## 4️⃣ Executar o dashboard
+
+```bash
+streamlit run app.py
+```
+
+---
+
+# 📸 Preview do Projeto
+
+Aqui você pode adicionar prints do dashboard rodando para deixar o portfólio ainda mais forte.
+
+Exemplo:
+
+* Tela principal
+* Top 10 mais baratos
+* Top 10 mais caros
+* Comparação entre lojas
+
+👉 Isso aumenta MUITO o impacto visual do projeto.
+
+---
+
+# 🧠 Diferenciais do Projeto
+
+Este projeto vai além de um simples scraper.
+
+Ele foi estruturado como uma solução real de comparação entre marketplaces, com foco em:
+
+* escalabilidade
+* organização de código
+* experiência visual
+* aplicação prática de automação
+* visão de produto
+
+A proposta foi desenvolver algo que se aproxima de um sistema real e não apenas um script acadêmico.
+
+---
+
+# 👨‍💻 Autor
+
+**João Pedro Carpini**
+
+Focado em:
+
+* Python
+* Automação
+* Dados
+* Inteligência Artificial
+* Soluções Tecnológicas
+
+Construindo projetos com visão prática e foco em mercado.
